@@ -7,8 +7,7 @@ import {Prompt} from "../service/chat.api";
 
 
 function ChatWindows() {
-    const { prompt, setNewChat, setPrompt, reply, setReply, currnentId, loading, setloading, setPrevChats, setOpenSidebar } = useContext(ChatContext)
-    const [lo, setlo] = useState(true);
+    const { prompt, setNewChat, setPrompt, reply, setReply, currnentId, loading, setloading, setPrevChats, setOpenSidebar } = useContext(ChatContext);
 
     // input change
     const handleInput = (e) => {
@@ -32,23 +31,13 @@ function ChatWindows() {
         // console.log(currnentId);
         // console.log(prompt);
 
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify({
-                message: prompt,
-                threadId: currnentId
-            })
-        };
-
         try {
-            const response = await fetch("http://localhost:8000/api/chat", options);
-            const res = await response.json();
-             console.log(res.reply);
-            setReply(res.reply);
+           const response=await Prompt({
+             threadId:currnentId,
+             message:prompt
+           })
+        //    console.log(response.data.reply);
+            setReply(response.data.reply);
         } catch (err) {
             console.log(err);
         }
