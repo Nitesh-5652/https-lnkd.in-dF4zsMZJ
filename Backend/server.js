@@ -6,8 +6,8 @@ const DB = require("./config/DataBae.js");
 const userRoute = require("./routes/userRoute.js");
 const chatRoutes = require("./routes/Chat.js");
 
-const port = process.env.PORT;
 const app = express();
+const port = process.env.PORT || 5000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -26,7 +26,8 @@ app.use(
 app.use("/api/auth", userRoute);
 app.use("/api", chatRoutes);
 
+DB();
+
 app.listen(port, () => {
-  console.log("server create successfully.");
-  DB();
+  console.log(`server running on port ${port}`);
 });

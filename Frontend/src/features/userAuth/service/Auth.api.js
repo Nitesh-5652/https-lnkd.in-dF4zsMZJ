@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://https-lnkd-in-df4zsmzj.onrender.com";
+const BASE_URL = "http://localhost:8000";
 
 export async function register({ username, email, password }) {
     try {
